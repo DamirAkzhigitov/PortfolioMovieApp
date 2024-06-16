@@ -6,18 +6,18 @@ export const guestSession = async () => {
   return res.data;
 };
 
-export const createSession = async (body) => {
+export const createSession = async (requestToken: string) => {
   let sessionId = "";
   try {
     const res = await axios.post<any, { data: NewSessionPayload }>(
       "authentication/session/new",
-      body,
+      {
+        request_token: requestToken,
+      },
     );
-
-    console.log("createSession response: ", res);
     sessionId = res.data.session_id;
   } catch (e) {
-    console.error("createSession error: ", e.message);
+    console.error(e);
   }
   return sessionId;
 };
