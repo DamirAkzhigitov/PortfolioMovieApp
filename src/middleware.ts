@@ -25,7 +25,7 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  if (sessionId && requestToken) {
+  if (sessionId && (requestToken || nextPageLogin)) {
     return NextResponse.redirect("http://localhost:3000/");
   }
 
