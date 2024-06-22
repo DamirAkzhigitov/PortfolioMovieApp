@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en" className="h-full bg-white">
       <body className={inter.className + " h-full"}>
         <Navbar />
+
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             {children}

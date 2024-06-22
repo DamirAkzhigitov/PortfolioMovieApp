@@ -1,5 +1,10 @@
 import axios from "@/api/axios";
-import { NewSessionPayload, RequestNewTokenPayload } from "@/types/auth";
+import {
+  NewSessionPayload,
+  RequestNewTokenPayload,
+  UserDetails,
+  UserDetailsPayload,
+} from "@/types/auth";
 
 export const guestSession = async () => {
   const res = await axios.get("authentication/guest_session/new");
@@ -28,4 +33,17 @@ export const createRequestToken = async () => {
   );
   if (res.data.success) return res.data.request_token;
   return null;
+};
+
+export const accountDetails = async (): Promise<UserDetails> => {
+  const res = await axios.get<UserDetailsPayload>("account");
+
+  return {
+    id: res.data.id,
+    username: res.data.username,
+    avatar: res.data.avatar?.tmdb?.avatar_path
+      ? "https://image.tmdb.org/t/p/original/" +
+        res.data.avatar.tmdb.avatar_path
+      : "",
+  };
 };
